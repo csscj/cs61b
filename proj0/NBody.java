@@ -28,7 +28,7 @@ public class NBody {
         double dt = Double.parseDouble(args[1]);
         String filename = args[2];
         double radius = NBody.readRadius(filename);
-        Planet[] body = NBody.readPlanets(filename);
+        Planet[] Body = NBody.readPlanets(filename);
 
         String imageToDraw = "./images/starfield.jpg";
         StdDraw.setScale(-radius, radius);
@@ -36,31 +36,31 @@ public class NBody {
 
         StdDraw.enableDoubleBuffering();
         for (double t=0;t<=T;t+=dt){
-            double[] xForce = new double[body.length];
-            double[] yForce = new double[body.length];
+            double[] xForce = new double[Body.length];
+            double[] yForce = new double[Body.length];
 
-            for(int i=0;i<body.length;i++){
-                xForce[i] = body[i].calcNetForceExertedByX(body);
-                yForce[i] = body[i].calcNetForceExertedByY(body);
+            for(int i=0;i<Body.length;i++){
+                xForce[i] = Body[i].calcNetForceExertedByX(Body);
+                yForce[i] = Body[i].calcNetForceExertedByY(Body);
             }
 
-            for(int i=0;i<body.length;i++) {
-                body[i].update(dt,xForce[i],yForce[i]);
+            for(int i=0;i<Body.length;i++) {
+                Body[i].update(dt,xForce[i],yForce[i]);
             }
             StdDraw.picture(0, 0, imageToDraw);
 
-            for(int i=0;i<body.length;i++) {
-                body[i].draw();
+            for(int i=0;i<Body.length;i++) {
+                Body[i].draw();
             }
             StdDraw.show();
             StdDraw.pause(10);
             }
-            StdOut.printf("%d\n", body.length);
+            StdOut.printf("%d\n", Body.length);
             StdOut.printf("%.2e\n", radius);
-            for (int i = 0; i < body.length; i++) {
+            for (int i = 0; i < Body.length; i++) {
                 StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
-                        body[i].xxPos, body[i].yyPos, body[i].xxVel,
-                        body[i].yyVel, body[i].mass, body[i].imgFileName);
+                        Body[i].xxPos, Body[i].yyPos, Body[i].xxVel,
+                        Body[i].yyVel, Body[i].mass, Body[i].imgFileName);
         }
         }
 
